@@ -10,14 +10,12 @@ import Closet from './Closet';
 
 export default function Closets() {
   return (
-    <View style={{
-        flex: 1,
-    }}>
-        <View style={{ marginTop:50 }}>
-            <Text>Closets page</Text>
+   
+        <View >
+            {/* <Text>Closets page</Text> */}
             <Closet></Closet>
-          
+
         </View>
-    </View>
+   
   );
 }

@@ -4,7 +4,7 @@ import * as Google from 'expo-google-app-auth';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, signInWithCredential, GoogleAuthProvider} from "firebase/auth";
 import {app, db} from "../firebase"
-import {ref, set} from "firebase/database"
+import {ref, set, child, get } from "firebase/database"
 
 
 
@@ -15,6 +15,24 @@ export default function LoginGoogle({navigation}) {
       if (firebaseUser) {
       return false;
     }}
+
+    function createUserToDb(){
+
+      const dbRef = ref(db);
+                  
+      get(child(dbRef, `users/${auth.currentUser.uid}`)).then((snapshot) => {
+        if (snapshot.exists() === false) {
+            set(
+              ref(db, 'users/' + auth.currentUser.uid), {
+                  userId: auth.currentUser.uid,
+                  
+            })
+        } else{
+          console.log("no need for new user")
+        }
+      })
+    }
+
     
     function onSignIn(googleUser) {
       // console.log('Google Auth Response', googleUser);
@@ -32,15 +50,10 @@ export default function LoginGoogle({navigation}) {
           // Sign in with credential from the Google user.
           signInWithCredential(auth, credential)
           .then((res=>{
-            console.log(res)
-            // check if sign in success
-            // check if user already exists
-            // if user already exists, skip -> if not create new user with set
-                  set(
-                    ref(db, 'users/' + auth.currentUser.uid), {
-                        userId: auth.currentUser.uid,
-                    }
-              )
+                // check if sign in success
+                // check if user already exists
+                // if user already exists, skip -> if not create new user with set
+                createUserToDb();
           }))
           .catch((error) => {
             // Handle Errors here.
@@ -52,6 +65,9 @@ export default function LoginGoogle({navigation}) {
       });
     }
   
+
+
+
   
   async function signInWithGoogleAsync() {
     try {

@@ -2,13 +2,14 @@
 import { useEffect, useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Closets from './closets/Closets';
+import Closet from './closets/Closet';
 import Browsecombinations from './tryons/Browsecombinations';
 import Login from './Login';
 import {app}  from "../firebase"
 import { MaterialCommunityIcons, AntDesign, FontAwesome5} from '@expo/vector-icons';
 import Profile from './profile/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import ClosetsNavigator from './closets/ClosetsNavigator';
 
 
 const Tab = createBottomTabNavigator();
@@ -37,7 +38,7 @@ export default function Navigation() {
   
       if (route.name === 'Combinations') {
         return <MaterialCommunityIcons name="human-handsup" size={size} color="black" />
-      } else if (route.name === 'Closets') {
+      } else if (route.name === 'Closet') {
         return <FontAwesome5 name="door-open" size={size} color="black" />
       }else if (route.name === 'Profile') {
         return <AntDesign name="user" size={size} color="black" />
@@ -52,7 +53,7 @@ export default function Navigation() {
           <NavigationContainer>      
               <Tab.Navigator screenOptions={screenOptions}>
                   <Tab.Screen name="Combinations" component={Browsecombinations} options={{ headerShown: false}} />
-                  <Tab.Screen name="Closets" component={Closets} options={{ headerShown: false}}  />
+                  <Tab.Screen name="Closet" component={ClosetsNavigator} options={{ headerShown: false}}  />
                   <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false}}/>
               </Tab.Navigator>
           </NavigationContainer>
