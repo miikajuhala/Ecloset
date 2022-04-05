@@ -3,14 +3,19 @@ import { StyleSheet, Text, View, TouchableOpacity, ImageBackground, Button } fro
 import { Ionicons } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
+import { ref, uploadBytes } from "firebase/storage";
+import { app, db, storage } from "../../firebase"
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function CameraComponent() {
+export default function CameraComponent({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [type, setType] = useState(Camera.Constants.Type.back);
 
   const [previewVisible, setPreviewVisible] = useState(false)
   const [capturedImage, setCapturedImage] = useState(null)
 
+
+  
   useEffect(() => {
     (async () => {
       const { status } = await Camera.requestCameraPermissionsAsync();
@@ -34,12 +39,17 @@ export default function CameraComponent() {
     // __startCamera()
   }
 
-
+  const savePicture =()=>{
+    // setPreviewVisible(false)
+    console.log(capturedImage.uri)
+    navigation.navigate("UsePicture",{capturedImage: capturedImage.uri})
+    // setCapturedImage(null)
+  }
 
   return (
     <>
     {previewVisible &&
-      <CameraPreview photo={capturedImage}  retakePicture={retakePicture}></CameraPreview>
+      <CameraPreview photo={capturedImage}  retakePicture={retakePicture} savePicture={savePicture}></CameraPreview>
     }
     {!previewVisible &&
    
@@ -57,7 +67,7 @@ export default function CameraComponent() {
                   : Camera.Constants.Type.back
               );
             }}>
-            <Ionicons name="md-camera-reverse-outline" size={35} color="black" />
+            <Ionicons name="md-camera-reverse-outline" size={35} color="white" />
 
           </TouchableOpacity>
         </View>
@@ -74,7 +84,7 @@ export default function CameraComponent() {
                   console.log(photo)
                 }
             }>
-            <Entypo name="circle" size={55} color="black" />
+            <Entypo name="circle" size={55} color="white" />
           </TouchableOpacity>
           </View>
       </Camera>
@@ -138,6 +148,7 @@ const CameraPreview = (props) => {
         }}
       />
       <Button title='retake' onPress={()=>props.retakePicture()}></Button>
+      <Button title='Use photo' onPress={()=>props.savePicture()}></Button>
     </View>
   )
 }
