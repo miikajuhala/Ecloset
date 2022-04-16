@@ -15,7 +15,7 @@ export default function ClosetsNavigator() {
             <Stack.Screen name="Closet" component={Closet} />
             <Stack.Screen name="AddClothes" component={AddClothesgg} />
             <Stack.Screen name="Camera" component={CameraComponent} />
-            <Stack.Screen name="UsePicture" component={usePicture} />
+            <Stack.Screen name="UsePicture" component={usePicture}   />
         </Stack.Navigator>
     )
 }
