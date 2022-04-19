@@ -2,7 +2,7 @@
 import React from 'react';
 import { Button, Keyboard, KeyboardAvoidingView, StyleSheet, Text, TouchableHighlight, View , TouchableWithoutFeedback, PlatformView, TextInput , Platform, ImageBackground, Pressable  } from 'react-native';
 
-import { ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { app, db, storage } from "../../firebase"
 import { getAuth } from 'firebase/auth';
 
@@ -30,7 +30,7 @@ const [collapsed, setCollapsed] = React.useState(true);
 const [collapsed1, setCollapsed1] = React.useState(true);
 
 const auth = getAuth(app);
-const  uri = route.params.capturedImage
+const uri = route.params.capturedImage
 
 
 const toggleExpanded = () => {
@@ -68,12 +68,21 @@ const toggleExpanded1 = () => {
         const ref1 = ref(storage,("images/"+auth.currentUser.uid+"/"+Date.now()));
         uploadBytes(ref1, blob).then((snapshot) => {
             console.log("5")
-        //   console.log(snapshot);
+          //  console.log(snapshot);
         // ota firebase url vastaan ja tallenna se url käyttäjälle + nimi +väri kuvalle
         // snapshot.metadata.fullPath
-         savePictureToUser(snapshot.metadata.fullPath);
+
+
+        const starsRef = ref(storage, snapshot.metadata.fullPath)
+        getDownloadURL(starsRef)
+          .then((url) => {
+            console.log("TÄSSSÄ VITTUSAATATANANANNAN",url)
+            console.log("6")
+            savePictureToUser(url);
+        })
+
         });
-        console.log("6")
+        
         blob.close();
       }
 
@@ -82,7 +91,8 @@ const toggleExpanded1 = () => {
         set(
           dbRef(db, 'users/' + auth.currentUser.uid+"/"+Date.now()), {
             userId: auth.currentUser.uid,
-            pictureUrl: "gs://sizefinder-7d214.appspot.com/"+picurl, 
+            name: title,
+            pictureUrl: picurl, 
             color: color,
             gategory: gategory,
             additionalInfo: text
