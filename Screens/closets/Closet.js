@@ -1,93 +1,104 @@
 import { onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button } from "react-native";
+import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button, Pressable } from "react-native";
 import AddclothesButton from "./AddclothesButton";
+
 import {db, app} from '../../firebase'
 import { getAuth } from 'firebase/auth';
 import { Image } from 'react-native';
 import { getDownloadURL, getStorage, ref as STORAGERef  } from 'firebase/storage'
-import {DATA as EXAMPLEDATA} from "./exampledata";
 
+import {DATA as EXAMPLEDATA} from "./exampledata";
+import {Picker, PickerIOS} from '@react-native-picker/picker';
+
+import colorData from './colors';
+import gategories from './gategories';
+import SelectGategory from "./SelectGategory";
 
 
 export default function Closet({navigation}) {
 
   const [selectedId, setSelectedId] = useState(null);
-  const [clothes, setClothes] = useState()
+  const [clothes, setClothes] = useState([])
+  const [sortedClothes, setSortedClothes] = useState(null)
+  const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
 
   const auth = getAuth(app);
   const storage = getStorage();
 
+
+
+
+ 
   useEffect(() => {
     const starCountRef = ref(db, 'users/' + auth.currentUser.uid);
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
 
         // console.log(Object.entries(data)[0][1].color)
-        if (data != null || undefined){
+        if (data != null || data != undefined){
          setClothes(Object.entries(data))
         }
         else{
-          setClothes(EXAMPLEDATA)
+          setClothes(EXAMPLEDATA) 
+
+        }
+
+        if(sortedClothes === null){
+          setSortedClothes(Object.entries(data))
         }
         // arr.push(data)
 
         // setClothes(arr[0])
-          console.log(Object.entries(data))
+          console.log("IN UE",Object.entries(data)) 
         
     });
 },[])
 
+useEffect(()=>{
+  console.log("LAUNCHED")
+  if(filterParam.gategory === "" && filterParam.color ===""){}
 
-// const  getImage = (urli)=>{
-//   const starsRef = STORAGERef(storage, urli);
-//   let urli2
-//   // Get the download URL
-//   getDownloadURL(starsRef)
-//     .then((url) => {
-//       console.log("TÄSSSÄ VITTUSAATATANANANNAN",url)
-//       urli2=url
+  else if(filterParam.gategory !== "" && filterParam.color ===""){
+    const result = clothes.filter(type => type[1].gategory === filterParam.gategory)
+    setSortedClothes(result)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+  }
+  else if(filterParam.gategory === "" && filterParam.color !==""){
+    const result = clothes.filter(type => type[1].color === filterParam.color)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    setSortedClothes(result)
+  }
+  else{
+    const result = clothes.filter(type => type[1].gategory === filterParam.gategory && type[1].color === filterParam.color)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    // setFilterParam({gategory: filterParam.gategory, color: filterParam.color})
+    setSortedClothes(result)
+  }
+
+},[filterParam])
+
+
+// const filter=(filterData)=>{
   
-//   })
-
-//   return(
-//     urli2+"rer"
-//   );
 
 // }
+  
+
 
 
 const Item = ({ item, onPress}) => (
   
   <View style={styles.card}>
   <Image style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
-  {/* <View style={styles.cardFooter}>
-    <View style={styles.socialBarContainer}>
-      <View style={styles.socialBarSection}>
-        <TouchableOpacity style={styles.socialBarButton}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/flat_round/50/000000/share.png'}}/>
-          <Text style={[styles.socialBarLabel, styles.share]}>Share</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.socialBarSection}>
-        <TouchableOpacity style={styles.socialBarButton}>
-          <Image style={styles.icon} source={{uri: 'https://png.icons8.com/color/50/000000/hearts.png'}}/>
-          <Text style={styles.socialBarLabel}>{item[1].name}</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
-  </View> */}
   </View>
 );
 
 
 
 
-
-
   //flatlist antaa yhden elementin kerallaan ja renderöi sen tässä
   const renderItem = ({ item }) => {
-    //  console.log(item)
     return (
       <Item
         item={item}
@@ -100,21 +111,26 @@ const Item = ({ item, onPress}) => (
   return (
    
     <SafeAreaView style={styles.container}>
-    <Text style={styles.title}>All clothes</Text>
+    <View>
+      <SelectGategory  styles={styles} setFilterParam={setFilterParam} filterParam={filterParam} gategories={gategories} colorData={colorData} ></SelectGategory>
+    </View>
       <FlatList
-        data={clothes}
+        data={sortedClothes}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
         numColumns={2}
         contentContainerStyle={styles.listContainer}
         // extraData={selectedId}
       />
-      
+       {/* <Button title="shoes" onPress={()=>filter()}></Button> */}
       <AddclothesButton navigation={navigation} ></AddclothesButton>
     </SafeAreaView>
   
   );
 }
+
+
+
 
 
 
@@ -128,8 +144,20 @@ const styles = StyleSheet.create({
     padding: 20,
     height: 300
   },
+  topmenu:{
+    flexDirection: "row",
+    alignContent: "center",
+    alignSelf: "center",
+  },
   title: {
     fontSize: 32,
+  },
+  title1: {
+    fontSize:22,
+    marginTop: 5,
+    marginHorizontal: 10,
+    borderRadius: 1,
+    borderWidth: 1
   },
   container1:{
     flex:1,
