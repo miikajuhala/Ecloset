@@ -1,9 +1,9 @@
 import { Picker, PickerIOS } from "@react-native-picker/picker";
 import React from "react";
-import { Pressable, Text } from "react-native";
+import { Pressable, StatusBar, StyleSheet, Text } from "react-native";
 import { View } from "react-native-animatable";
 import Collapsible from "react-native-collapsible";
-
+import { Ionicons } from '@expo/vector-icons';
 
 
 
@@ -25,18 +25,24 @@ export default function SelectGategory(props) {
 
     return (
         <>
-        <View style={props.styles.topmenu}>
-            <Pressable  onPress={()=>toggleExpanded()}>
-                <Text style={props.styles.title1}>Select gategory</Text>
+        <View style={styles.topmenu}>
+            <Pressable style={styles.item} onPress={()=>toggleExpanded()}>
+                <Text style={styles.title1}>Select gategory</Text>
             </Pressable>
             <Pressable onPress={()=>toggleExpanded1()}>
-                <Text style={props.styles.title1}>Select color</Text>
+                <Text style={styles.title1}>Select color</Text>
             </Pressable>
         </View>
         
         <View style={{alignContent: "flex-start", flexDirection: "row", margin:15}}>
-            <Text style={{marginHorizontal: 5}} >{props.filterParam.gategory}</Text>
-            <Text style={{marginHorizontal: 5}}>{props.filterParam.color}</Text>
+            <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, gategory: ""})}> 
+                <Text style={{marginLeft: 7, marginRight: 1}} >{props.filterParam.gategory}</Text>
+                {props.filterParam.gategory!=="" &&<Ionicons name="remove-circle-outline" size={12} color="red" />}
+            </Pressable>
+            <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, color: ""})}> 
+                <Text style={{marginLeft: 20, marginRight: 1}}>{props.filterParam.color}</Text>
+                {props.filterParam.color!=="" &&<Ionicons name="remove-circle-outline" size={12} color="red" />}
+            </Pressable> 
         </View>
         
 
@@ -77,3 +83,39 @@ export default function SelectGategory(props) {
         </Collapsible>
         </>
 )}
+
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      marginTop: StatusBar.currentHeight || 0,
+    },
+    item: {
+      margin: 1,
+      marginBottom: 4
+    },
+    pres: {
+        alignContent: "center",
+        alignItems: "center",
+        flexDirection: "row"
+      },
+    topmenu:{
+      flexDirection: "row",
+      borderRadius: 1,
+      borderBottomWidth: 1,
+      borderTopWidth: 1,
+      width:"100%"
+    },
+    title: {
+      fontSize: 32,
+    },
+    title1: {
+      fontSize:22,
+      marginTop: 5,
+      marginHorizontal: 10,
+    //   borderRadius: 1,
+    //   borderWidth: 1
+    },
+    
+  
+  });
+  

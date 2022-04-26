@@ -1,5 +1,6 @@
 
 const gategories = [
+    {label: 'no selection', value: ''},
     {label: 'T-shirts', value: 'T-shirts'},
     {label: 'Shirts', value: 'Shirts'},
     {label: 'Sweatshirts & Hoodies', value: 'Sweatshirts & Hoodies'},

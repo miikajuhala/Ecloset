@@ -1,5 +1,10 @@
 const colorData = [
     {
+      label: 'no selection',
+      accessibilityLabel: '',
+      color: ''
+    },
+    {
       label: 'Black',
       accessibilityLabel: 'Black',
       color: 'black'

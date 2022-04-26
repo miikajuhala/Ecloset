@@ -23,6 +23,8 @@ export default function Closet({navigation}) {
   const [sortedClothes, setSortedClothes] = useState(null)
   const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
 
+  const [gg, setGG] = useState(false)
+
   const auth = getAuth(app);
   const storage = getStorage();
 
@@ -40,7 +42,8 @@ export default function Closet({navigation}) {
          setClothes(Object.entries(data))
         }
         else{
-          setClothes(EXAMPLEDATA) 
+          
+         setClothes(EXAMPLEDATA) 
 
         }
 
@@ -55,44 +58,42 @@ export default function Closet({navigation}) {
     });
 },[])
 
+
+
 useEffect(()=>{
-  console.log("LAUNCHED")
-  if(filterParam.gategory === "" && filterParam.color ===""){}
+  setGG(false)
+  console.log("LAUNCHED", clothes,filterParam )
+  if(filterParam.gategory ==="" && filterParam.color ===""){
+
+    setSortedClothes(clothes)
+    setGG(true)
+  }
 
   else if(filterParam.gategory !== "" && filterParam.color ===""){
     const result = clothes.filter(type => type[1].gategory === filterParam.gategory)
     setSortedClothes(result)
-    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    setGG(true)
+    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
   }
   else if(filterParam.gategory === "" && filterParam.color !==""){
     const result = clothes.filter(type => type[1].color === filterParam.color)
-    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
     setSortedClothes(result)
+    setGG(true)
   }
   else{
     const result = clothes.filter(type => type[1].gategory === filterParam.gategory && type[1].color === filterParam.color)
-    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
     // setFilterParam({gategory: filterParam.gategory, color: filterParam.color})
     setSortedClothes(result)
+    setGG(true)
   }
 
 },[filterParam])
 
 
-// const filter=(filterData)=>{
-  
-
-// }
-  
 
 
-
-const Item = ({ item, onPress}) => (
-  
-  <View style={styles.card}>
-  <Image style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
-  </View>
-);
 
 
 
@@ -100,10 +101,9 @@ const Item = ({ item, onPress}) => (
   //flatlist antaa yhden elementin kerallaan ja renderöi sen tässä
   const renderItem = ({ item }) => {
     return (
-      <Item
-        item={item}
-        onPress={() => setSelectedId(item)}
-      />
+      <View style={styles.card}>
+        <Image style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
+      </View>
     );
   };
 
@@ -114,14 +114,14 @@ const Item = ({ item, onPress}) => (
     <View>
       <SelectGategory  styles={styles} setFilterParam={setFilterParam} filterParam={filterParam} gategories={gategories} colorData={colorData} ></SelectGategory>
     </View>
-      <FlatList
+      {gg && <FlatList
         data={sortedClothes}
         renderItem={renderItem}
         keyExtractor={(item) => item.name}
         numColumns={2}
         contentContainerStyle={styles.listContainer}
         // extraData={selectedId}
-      />
+      />}
        {/* <Button title="shoes" onPress={()=>filter()}></Button> */}
       <AddclothesButton navigation={navigation} ></AddclothesButton>
     </SafeAreaView>
