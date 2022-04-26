@@ -1,7 +1,7 @@
 import React , { useState, useEffect } from 'react';
 import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button } from "react-native";
 import { Camera } from 'expo-camera';
-
+import ImagePickerScreen from './ImagePicker'
 
 
 
@@ -12,23 +12,17 @@ export default function AddClothesgg({navigation}) {
 
 
  
-  
-  
-
-
-  // functio mikä lisää otetun kuvan kantaa auth.id/pics/uuspicID
-
-  
-
  
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container}> 
         <Text style={styles.title}>add clothes screen</Text>
 
 
-        <Button style={styles.btn} onPress={()=>navigation.navigate("Camera")}  title='Take picture'></Button>
+        <Button style={styles.btn} onPress={()=>navigation.navigate("Camera")}  title='Take picture with camera'></Button>
 
-        <Button style={styles.btn} onPress={()=>folder()} title='Select from phone'></Button>
+      
+
+        <ImagePickerScreen navigation={navigation}></ImagePickerScreen>
     </SafeAreaView>
   );
 }

@@ -23,8 +23,6 @@ export default function Closet({navigation}) {
   const [sortedClothes, setSortedClothes] = useState(null)
   const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
 
-  const [gg, setGG] = useState(false)
-
   const auth = getAuth(app);
   const storage = getStorage();
 
@@ -42,14 +40,13 @@ export default function Closet({navigation}) {
          setClothes(Object.entries(data))
         }
         else{
-          
-         setClothes(EXAMPLEDATA) 
+          setClothes(EXAMPLEDATA) 
 
         }
 
-        if(sortedClothes === null){
+        
           setSortedClothes(Object.entries(data))
-        }
+        
         // arr.push(data)
 
         // setClothes(arr[0])
@@ -58,41 +55,34 @@ export default function Closet({navigation}) {
     });
 },[])
 
-
-
 useEffect(()=>{
-  setGG(false)
-  console.log("LAUNCHED", clothes,filterParam )
-  if(filterParam.gategory ==="" && filterParam.color ===""){
-
+  console.log("LAUNCHED")
+  if(filterParam.gategory === "" && filterParam.color ===""){
+    
     setSortedClothes(clothes)
-    setGG(true)
   }
 
   else if(filterParam.gategory !== "" && filterParam.color ===""){
     const result = clothes.filter(type => type[1].gategory === filterParam.gategory)
     setSortedClothes(result)
-    setGG(true)
-    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
   }
   else if(filterParam.gategory === "" && filterParam.color !==""){
     const result = clothes.filter(type => type[1].color === filterParam.color)
-    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
     setSortedClothes(result)
-    setGG(true)
   }
   else{
     const result = clothes.filter(type => type[1].gategory === filterParam.gategory && type[1].color === filterParam.color)
-    // console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
+    console.log("RESUKLTS:  ",result, filterParam,"filterparam state: " ,filterParam)
     // setFilterParam({gategory: filterParam.gategory, color: filterParam.color})
     setSortedClothes(result)
-    setGG(true)
   }
 
 },[filterParam])
 
 
-
+ 
 
 
 
@@ -114,14 +104,14 @@ useEffect(()=>{
     <View>
       <SelectGategory  styles={styles} setFilterParam={setFilterParam} filterParam={filterParam} gategories={gategories} colorData={colorData} ></SelectGategory>
     </View>
-      {gg && <FlatList
+      <FlatList
         data={sortedClothes}
         renderItem={renderItem}
-        keyExtractor={(item) => item.name}
+        keyExtractor={(item) => item[1].pictureUrl}
         numColumns={2}
         contentContainerStyle={styles.listContainer}
         // extraData={selectedId}
-      />}
+      />
        {/* <Button title="shoes" onPress={()=>filter()}></Button> */}
       <AddclothesButton navigation={navigation} ></AddclothesButton>
     </SafeAreaView>

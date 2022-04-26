@@ -1,5 +1,5 @@
 import { Picker, PickerIOS } from "@react-native-picker/picker";
-import React from "react";
+import React, { useEffect } from "react";
 import { Pressable, StatusBar, StyleSheet, Text } from "react-native";
 import { View } from "react-native-animatable";
 import Collapsible from "react-native-collapsible";
@@ -12,6 +12,8 @@ export default function SelectGategory(props) {
 
     const [collapsed, setCollapsed] = React.useState(true);
     const [collapsed1, setCollapsed1] = React.useState(true);
+
+
 
     const toggleExpanded = () => {
         // Toggling the state of single Collapsible
@@ -37,11 +39,11 @@ export default function SelectGategory(props) {
         <View style={{alignContent: "flex-start", flexDirection: "row", margin:15}}>
             <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, gategory: ""})}> 
                 <Text style={{marginLeft: 7, marginRight: 1}} >{props.filterParam.gategory}</Text>
-                {props.filterParam.gategory!=="" &&<Ionicons name="remove-circle-outline" size={12} color="red" />}
+                {props.filterParam.gategory!=="" && <Ionicons name="remove-circle-outline" size={12} color="red" />}
             </Pressable>
             <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, color: ""})}> 
                 <Text style={{marginLeft: 20, marginRight: 1}}>{props.filterParam.color}</Text>
-                {props.filterParam.color!=="" &&<Ionicons name="remove-circle-outline" size={12} color="red" />}
+                {props.filterParam.color!=="" && <Ionicons name="remove-circle-outline" size={12} color="red" />}
             </Pressable> 
         </View>
         
@@ -54,7 +56,7 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.gategory}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, gategory: itemValue})
-                toggleExpanded()
+                // toggleExpanded()
                 }
             }>
             {props.gategories.map(gategory => 
@@ -72,7 +74,7 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.color}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, color: itemValue})
-                toggleExpanded1()
+                // toggleExpanded1()
                 }
             }>
             {props.colorData.map(color =>
