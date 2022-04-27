@@ -56,9 +56,7 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.gategory}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, gategory: itemValue})
-                setTimeout(() => {
-                    toggleExpanded()
-                }, 700);
+                setTimeout(() => {setCollapsed(true)}, 700);
                 }
             }>
             {props.gategories.map(gategory => 
@@ -76,9 +74,7 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.color}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, color: itemValue})
-                setTimeout(() => {
-                    toggleExpanded1()
-                }, 700);
+                 setTimeout(() => { setCollapsed1(true)}, 700);
                 }
             }>
             {props.colorData.map(color =>
