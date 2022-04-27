@@ -1,6 +1,6 @@
 import { onValue, ref } from "firebase/database";
 import React, { useEffect, useState } from "react";
-import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button, Pressable } from "react-native";
+import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button, Pressable, ImageBackground } from "react-native";
 import AddclothesButton from "./AddclothesButton";
 
 import {db, app} from '../../firebase'
@@ -14,7 +14,8 @@ import {Picker, PickerIOS} from '@react-native-picker/picker';
 import colorData from './colors';
 import gategories from './gategories';
 import SelectGategory from "./SelectGategory";
-
+import Loading from "../../Loading";
+import favicon from "../../assets/load.gif"
 
 export default function Closet({navigation}) {
 
@@ -22,6 +23,7 @@ export default function Closet({navigation}) {
   const [clothes, setClothes] = useState([])
   const [sortedClothes, setSortedClothes] = useState(null)
   const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
+  const [loaded, setLoaded] = useState(false)
 
   const auth = getAuth(app);
   const storage = getStorage();
@@ -31,6 +33,7 @@ export default function Closet({navigation}) {
 
  
   useEffect(() => {
+    
     const starCountRef = ref(db, 'users/' + auth.currentUser.uid);
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
@@ -46,6 +49,7 @@ export default function Closet({navigation}) {
 
         
           setSortedClothes(Object.entries(data))
+         
         
         // arr.push(data)
 
@@ -53,13 +57,16 @@ export default function Closet({navigation}) {
           console.log("IN UE",Object.entries(data)) 
         
     });
-},[])
+},[!sortedClothes, !filterParam])
 
+
+// korvaa funktiolla mikä  launchataan samalla kun vaihetaan parametriä
 useEffect(()=>{
   console.log("LAUNCHED")
   if(filterParam.gategory === "" && filterParam.color ===""){
     
     setSortedClothes(clothes)
+    
   }
 
   else if(filterParam.gategory !== "" && filterParam.color ===""){
@@ -90,20 +97,34 @@ useEffect(()=>{
 
   //flatlist antaa yhden elementin kerallaan ja renderöi sen tässä
   const renderItem = ({ item }) => {
+    if(item[1].pictureUrl !== null){
     return (
       <View style={styles.card}>
-        <Image style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
+      <ImageBackground style={styles.cardImage} source={favicon}>
+        <Image
+          style={styles.cardImage}
+          source={{uri:item[1].pictureUrl}}
+          ImageBackground
+          >
+           
+        </Image>
+        </ImageBackground>
+        <Text>{item[1].name}</Text>
       </View>
     );
+    }
   };
 
 
   return (
+   <>
    
     <SafeAreaView style={styles.container}>
     <View>
       <SelectGategory  styles={styles} setFilterParam={setFilterParam} filterParam={filterParam} gategories={gategories} colorData={colorData} ></SelectGategory>
     </View>
+
+
       <FlatList
         data={sortedClothes}
         renderItem={renderItem}
@@ -112,10 +133,12 @@ useEffect(()=>{
         contentContainerStyle={styles.listContainer}
         // extraData={selectedId}
       />
-       {/* <Button title="shoes" onPress={()=>filter()}></Button> */}
-      <AddclothesButton navigation={navigation} ></AddclothesButton>
+       <AddclothesButton navigation={navigation} ></AddclothesButton>
     </SafeAreaView>
-  
+
+    
+    
+    </>
   );
 }
 

@@ -15,7 +15,7 @@ export default function AddClothesgg({navigation}) {
  
   return (
     <SafeAreaView style={styles.container}> 
-        <Text style={styles.title}>add clothes screen</Text>
+        <Text style={styles.title}>add new clothes</Text>
 
 
         <Button style={styles.btn} onPress={()=>navigation.navigate("Camera")}  title='Take picture with camera'></Button>

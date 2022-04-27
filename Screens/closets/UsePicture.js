@@ -17,6 +17,7 @@ import Collapsible from 'react-native-collapsible';
 import icon from '../../assets/icon.png'
 import { MaterialCommunityIcons, AntDesign, Ionicons} from '@expo/vector-icons';
 import { set, ref as dbRef } from 'firebase/database';
+import ActionButton from 'react-native-action-button';
 
 
 
@@ -86,6 +87,8 @@ const toggleExpanded1 = () => {
         blob.close();
       }
 
+      
+
       const savePictureToUser = (picurl)=>{
 
         set(
@@ -114,6 +117,7 @@ const toggleExpanded1 = () => {
           </View>
         );
       }
+
 
 
 
@@ -161,7 +165,9 @@ const toggleExpanded1 = () => {
               data={colorData}
               selectedBtn={(e) => {
                 setColor(e.color)
-                toggleExpanded()
+                setTimeout(() => {
+                    toggleExpanded()
+                  }, 1000);
               }}
               icon={
                   <Icon
@@ -197,7 +203,12 @@ const toggleExpanded1 = () => {
                 data={gategories}
                 selectedBtn={(e) => {
                   setGategory(e.value)
-                  toggleExpanded1()
+                  setTimeout(() => {
+                    toggleExpanded1()
+                  }, 1000);
+                 
+
+                  
                 }}
                 icon={
                     <Icon
@@ -222,16 +233,15 @@ const toggleExpanded1 = () => {
 
 
 
-        {/* <Button  title='Save to closet' onPress={()=>savePicture()}></Button> */}
-        <TouchableOpacity onPress={()=>savePicture()} style={{alignSelf: "center", marginTop: 120}}>
-          <Ionicons name="save-outline" size={70} color="#383838" />
-        </TouchableOpacity>
+        
 
 
       </ScrollView>
-        
+      
+        {/* <Button  title='Save to closet' onPress={()=>savePicture()}></Button> */}
+        <ActionButton buttonColor={color} size={75} position='center' style={{bottom:0}} title="New Task" onPress={()=>savePicture()}></ActionButton>
        
-        </>
+      </>
       </TouchableWithoutFeedback>
    </KeyboardAvoidingView>
   );

@@ -29,19 +29,19 @@ export default function SelectGategory(props) {
         <>
         <View style={styles.topmenu}>
             <Pressable style={styles.item} onPress={()=>toggleExpanded()}>
-                <Text style={styles.title1}>Select gategory</Text>
+                <Text style={styles.title1}>Gategory</Text>
             </Pressable>
             <Pressable onPress={()=>toggleExpanded1()}>
-                <Text style={styles.title1}>Select color</Text>
+                <Text style={styles.title1}>Color</Text>
             </Pressable>
         </View>
         
         <View style={{alignContent: "flex-start", flexDirection: "row", margin:15}}>
-            <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, gategory: ""})}> 
+            <Pressable hitSlop={10} style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, gategory: ""})}> 
                 <Text style={{marginLeft: 7, marginRight: 1}} >{props.filterParam.gategory}</Text>
                 {props.filterParam.gategory!=="" && <Ionicons name="remove-circle-outline" size={12} color="red" />}
             </Pressable>
-            <Pressable style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, color: ""})}> 
+            <Pressable hitSlop={10} style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, color: ""})}> 
                 <Text style={{marginLeft: 20, marginRight: 1}}>{props.filterParam.color}</Text>
                 {props.filterParam.color!=="" && <Ionicons name="remove-circle-outline" size={12} color="red" />}
             </Pressable> 
@@ -56,7 +56,9 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.gategory}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, gategory: itemValue})
-                // toggleExpanded()
+                setTimeout(() => {
+                    toggleExpanded()
+                }, 700);
                 }
             }>
             {props.gategories.map(gategory => 
@@ -74,7 +76,9 @@ export default function SelectGategory(props) {
             selectedValue={props.filterParam.color}
             onValueChange={(itemValue, itemIndex) =>{
                 props.setFilterParam({...props.filterParam, color: itemValue})
-                // toggleExpanded1()
+                setTimeout(() => {
+                    toggleExpanded1()
+                }, 700);
                 }
             }>
             {props.colorData.map(color =>
@@ -105,7 +109,12 @@ const styles = StyleSheet.create({
       borderRadius: 1,
       borderBottomWidth: 1,
       borderTopWidth: 1,
-      width:"100%"
+      width:"100%",
+      alignItems: "center",
+      alignContent: "center",
+      textAlign: "center",
+      alignSelf: "center"
+      
     },
     title: {
       fontSize: 32,

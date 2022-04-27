@@ -15,13 +15,20 @@ import colorData from '../closets/colors';
 import gategories from '../closets/gategories';
 import SelectGategory from "../closets/SelectGategory";
 import Carousel from 'react-native-anchor-carousel';
+import Loading from "../../Loading";
 
 
 export default function Browsecombinations({navigation}) {
 
   const [selectedId, setSelectedId] = useState(null);
   const [clothes, setClothes] = useState([])
-  const [sortedClothes, setSortedClothes] = useState(null)
+
+  const [shirts, setShirts] = useState(null)
+  const [pants, setPants] = useState(null)
+  const [shoes, setShoes] = useState(null)
+
+  const [loaded, setLoaded] = useState(false)
+
   const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
 
   const auth = getAuth(app);
@@ -36,19 +43,21 @@ export default function Browsecombinations({navigation}) {
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
 
-        // console.log(Object.entries(data)[0][1].color)
-        if (data != null || data != undefined){
-         setClothes(Object.entries(data))
-        }
-        else{
-          
-         setClothes(EXAMPLEDATA) 
+         const clothesArray = Object.entries(data)
 
-        }
+         const shirts1 = clothesArray.filter(type => type[1].gategory === "Shirts" || type[1].gategory === "T-shirts" || type[1].gategory ===  "Sweatshirts & Hoodies" ||  type[1].gategory === 'Jackets')
+         setShirts(shirts1)
+        //  console.log("SHIRTS", shirts1)
 
-        if(sortedClothes === null){
-          setSortedClothes(Object.entries(data))
-        }
+         const pants1 = clothesArray.filter(type => type[1].gategory === 'Jeans' ||  type[1].gategory === 'Trousers' ||  type[1].gategory === 'Shorts' || type[1].gategory === 'Joggers')
+         setPants(pants1)
+        //  console.log("PANTS",pants1)
+
+         const shoes1 = clothesArray.filter(type => type[1].gategory ==='Shoes')
+         setShoes(shoes1)
+        //  console.log("SHOES", shoes1)
+        
+       
         // arr.push(data)
 
         // setClothes(arr[0])
@@ -67,7 +76,7 @@ export default function Browsecombinations({navigation}) {
 const renderItem = ({ item }) => {
   return (
     <View style={styles.card}>
-      <Image style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
+      <Image onLoad={()=>setLoaded(true)}  style={styles.cardImage} source={{uri:item[1].pictureUrl}}/>
     </View>
   );
 };
@@ -78,10 +87,10 @@ const renderItem = ({ item }) => {
 
   return (
    <View style={{flex:1, marginTop: 55}}>
-    
+      {!loaded && <Loading></Loading>}
     <Carousel
     style={{ height: 700}}
-    data={clothes}
+    data={shirts}
     renderItem={renderItem}
     itemWidth={windowWidth * 0.8}
     separatorWidth={0}
@@ -90,7 +99,7 @@ const renderItem = ({ item }) => {
 
     <Carousel
       style={{ height:700}}
-      data={clothes}
+      data={pants}
       renderItem={renderItem}
       itemWidth={windowWidth * 0.8}
       separatorWidth={0}
@@ -98,7 +107,7 @@ const renderItem = ({ item }) => {
     />
    <Carousel
      style={{ height: 400}}
-      data={clothes}
+      data={shoes}
       renderItem={renderItem}
       itemWidth={windowWidth * 0.8}
       separatorWidth={0}
