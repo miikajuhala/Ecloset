@@ -1,37 +1,41 @@
 import React , { useState, useEffect } from 'react';
 import {View, FlatList, SafeAreaView, StatusBar, StyleSheet, Text, TouchableOpacity, Button } from "react-native";
-import { Camera } from 'expo-camera';
 import ImagePickerScreen from './ImagePicker'
-
+import { AntDesign,  Ionicons} from '@expo/vector-icons';
 
 
 
 export default function AddClothesgg({navigation}) {
-  const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(Camera.Constants.Type.back);
+ 
 
 
  
  
   return (
-    <SafeAreaView style={styles.container}> 
-        <Text style={styles.title}>add new clothes</Text>
+    <View style={styles.container}> 
+        {/* <Text style={styles.title}>add new clothes</Text> */}
 
 
-        <Button style={styles.btn} onPress={()=>navigation.navigate("Camera")}  title='Take picture with camera'></Button>
+        <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("Camera")}>
+        <Ionicons name="ios-camera-outline" size={55} color="black" />
+        <Text>Take picture</Text>
+        </TouchableOpacity>
 
-      
+        <View style={styles.verticleLine}></View>
 
         <ImagePickerScreen navigation={navigation}></ImagePickerScreen>
-    </SafeAreaView>
+
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-    alignItems: "center"
+    // flexDirection: "column",
+    marginTop: 20,
+    alignItems: "center",
+    alignSelf: "center"
   },
   item: {
     padding: 20,
@@ -43,5 +47,15 @@ const styles = StyleSheet.create({
   },
   btn: {
     fontSize: 32,
+    alignContent: "center",
+    alignItems: "center",
+    marginTop: 55,
+    
   },
+  verticleLine: {
+    height: 1,
+    width: 300,
+    backgroundColor: '#909090',
+    margin: 15
+  }
 });

@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { getAuth } from 'firebase/auth';
 import { app } from "../../firebase"
+import LoginGoogle from '../../buttons/GoogleLogin';
 
 
 export default function Profile() {
@@ -20,16 +21,20 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}></View>
-      <Image style={styles.avatar} source={{uri: 'https://bootdey.com/img/Content/avatar/avatar6.png'}}/>
       <View style={styles.body}>
         <View style={styles.bodyContent}>
-          <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer}>
-            <Text>Sign out</Text>  
-          </TouchableOpacity>              
+
+      <Text style={styles.description}>Change user</Text>
+       <LoginGoogle></LoginGoogle>
+
+        <View style={styles.verticleLine}></View>
+                   
           <TouchableOpacity style={styles.buttonContainer}>
             <Text>Buy premium</Text> 
           </TouchableOpacity>
+          <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer}>
+            <Text>Sign out</Text>  
+          </TouchableOpacity>   
         </View>
     </View>
   </View>
@@ -40,8 +45,21 @@ export default function Profile() {
 
 const styles = StyleSheet.create({
 header:{
-backgroundColor: "#00BFFF",
+backgroundColor: "#9b59b6",
 height:200,
+},
+container: {
+flex:1,
+marginTop: 150,
+alignContent: "center",
+alignItems:"center",
+alignSelf:"center"
+},
+verticleLine: {
+  height: 1,
+  width: 300,
+  backgroundColor: '#909090',
+  margin: 15
 },
 avatar: {
 width: 130,
@@ -67,14 +85,9 @@ flex: 1,
 alignItems: 'center',
 padding:30,
 },
-name:{
-fontSize:28,
-color: "#696969",
-fontWeight: "600"
-},
 info:{
 fontSize:16,
-color: "#00BFFF",
+color: "#9b59b6",
 marginTop:10
 },
 description:{
@@ -83,6 +96,7 @@ color: "#696969",
 marginTop:10,
 textAlign: 'center'
 },
+
 buttonContainer: {
 marginTop:10,
 height:45,
@@ -92,6 +106,17 @@ alignItems: 'center',
 marginBottom:20,
 width:250,
 borderRadius:30,
-backgroundColor: "#00BFFF",
+backgroundColor: "#9b59b6",
 },
+buttonContainer1:{
+  marginTop:10,
+  height:45,
+  flexDirection: 'row',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginBottom:20,
+  width:250,
+  borderRadius:30,
+  backgroundColor: "#9999FF",
+}
 });

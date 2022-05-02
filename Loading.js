@@ -8,7 +8,6 @@ export default function Loading() {
 
   return (
     <View style={{alignContent: "flex-start", alignSelf:"center"}} >
-        
         <Progress.Circle size={100} indeterminate={true} />
     </View>
   );

@@ -47,7 +47,6 @@ const toggleExpanded1 = () => {
 
 
 
-
     async function savePicture() {
         const blob = await new Promise((resolve, reject) => {
             console.log("1")
@@ -77,7 +76,6 @@ const toggleExpanded1 = () => {
         const starsRef = ref(storage, snapshot.metadata.fullPath)
         getDownloadURL(starsRef)
           .then((url) => {
-            console.log("TÄSSSÄ VITTUSAATATANANANNAN",url)
             console.log("6")
             savePictureToUser(url);
         })
@@ -88,25 +86,37 @@ const toggleExpanded1 = () => {
       }
 
       
-
-      const savePictureToUser = (picurl)=>{
-
-        set(
-          dbRef(db, 'users/' + auth.currentUser.uid+"/"+Date.now()), {
-            userId: auth.currentUser.uid,
-            name: title,
-            pictureUrl: picurl, 
-            color: color,
-            gategory: gategory,
-            additionalInfo: text
-          }
-      )
-      .catch(err => Alert.alert("Jokin meni pieleen",err))
-        // save pic to realtime database 
-        //   user/currentuser.uid/images/imagename : color: color, gategory: gategory, url: "gs://sizefinder-7d214.appspot.com/images/"+imagename
-        console.log("7")
-        navigation.navigate("Closet")
+  // TODO: UTF-8, empty string check!!!!
+    const getName =(i,name)=>{
+      if(name==="" || name===null || name === undefined){
+        if (i ===1)  return "no name"
+        if(i===2) return "none"
+        
+      }else{
+        return name
       }
+    }
+
+
+    const savePictureToUser = (picurl)=>{
+      const date = Date.now()
+      set(
+        dbRef(db, 'users/' + auth.currentUser.uid+"/"+date), {
+          userId: auth.currentUser.uid,
+          name: getName(1,title),
+          pictureUrl: picurl, 
+          color: getName(2,color),
+          gategory: getName(2,gategory),
+          additionalInfo: getName(2,text),
+          date: date
+        }
+    )
+    .catch(err => Alert.alert("Jokin meni pieleen",err))
+      // save pic to realtime database 
+      //   user/currentuser.uid/images/imagename : color: color, gategory: gategory, url: "gs://sizefinder-7d214.appspot.com/images/"+imagename
+      console.log("7")
+      navigation.navigate("Closet")
+    }
 
 
       const ItemLogo = () =>{

@@ -16,6 +16,8 @@ import gategories from './gategories';
 import SelectGategory from "./SelectGategory";
 import Loading from "../../Loading";
 import favicon from "../../assets/load.gif"
+import Modal from "react-native-modal";
+import ModalTester from "./ModalTester";
 
 export default function Closet({navigation}) {
 
@@ -47,13 +49,8 @@ export default function Closet({navigation}) {
 
         }
 
-        
           setSortedClothes(Object.entries(data))
-         
         
-        // arr.push(data)
-
-        // setClothes(arr[0])
           console.log("IN UE",Object.entries(data)) 
         
     });
@@ -104,12 +101,12 @@ useEffect(()=>{
         <Image
           style={styles.cardImage}
           source={{uri:item[1].pictureUrl}}
-          ImageBackground
-          >
-           
+        >
         </Image>
         </ImageBackground>
-        <Text>{item[1].name}</Text>
+        <ModalTester item={item}></ModalTester>
+        
+    
       </View>
     );
     }
@@ -133,6 +130,7 @@ useEffect(()=>{
         contentContainerStyle={styles.listContainer}
         // extraData={selectedId}
       />
+    
        <AddclothesButton navigation={navigation} ></AddclothesButton>
     </SafeAreaView>
 

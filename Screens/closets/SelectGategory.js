@@ -118,7 +118,11 @@ const styles = StyleSheet.create({
     title1: {
       fontSize:22,
       marginTop: 5,
+      marginBottom:5,
       marginHorizontal: 10,
+        borderWidth: 1,
+        borderColor:"grey",
+        borderRadius: 10,
     //   borderRadius: 1,
     //   borderWidth: 1
     },

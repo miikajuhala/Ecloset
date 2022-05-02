@@ -13,11 +13,11 @@ export default function ClosetsNavigator() {
 
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Closet" component={Closet} />
-            <Stack.Screen name="AddClothes" component={AddClothesgg} />
-            <Stack.Screen name="Camera" component={CameraComponent} />
-            <Stack.Screen name="UsePicture" component={usePicture}   />
-            <Stack.Screen name="ImagePickerScreen" component={ImagePickerScreen}   />
+            <Stack.Screen name="Closet" component={Closet} options={{ headerShown: false}}/>
+            <Stack.Screen name="AddClothes" component={AddClothesgg} options={{ title:""}}/>
+            <Stack.Screen name="Camera" component={CameraComponent}  options={{ title:""}} />
+            <Stack.Screen name="UsePicture" component={usePicture}   options={{ title:""}} />
+            <Stack.Screen name="ImagePickerScreen" component={ImagePickerScreen} options={{ title:""}}/>
             
         </Stack.Navigator>
     )

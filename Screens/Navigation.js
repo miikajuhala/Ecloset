@@ -52,7 +52,7 @@ export default function Navigation() {
         return (
           <NavigationContainer>      
               <Tab.Navigator screenOptions={screenOptions}>
-                  <Tab.Screen name="Combinations" component={Browsecombinations}  />
+                  <Tab.Screen name="Combinations" component={Browsecombinations}  options={{ headerShown: false}}/>
                   <Tab.Screen name="Closet" component={ClosetsNavigator} options={{ headerShown: false}}  />
                   <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false}}/>
               </Tab.Navigator>
