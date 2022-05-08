@@ -27,7 +27,7 @@ export default function SelectGategory(props) {
 
     return (
         <>
-        <View style={styles.topmenu}>
+        <View style={{flexDirection:"row", alignContent:"center", alignItems:"center", alignSelf:"center"}}>
             <Pressable style={styles.item} onPress={()=>toggleExpanded()}>
                 <Text style={styles.title1}>Gategory</Text>
             </Pressable>
@@ -36,7 +36,7 @@ export default function SelectGategory(props) {
             </Pressable>
         </View>
         
-        <View style={{alignContent: "flex-start", flexDirection: "row", margin:15}}>
+        <View style={{alignContent: "flex-start", flexDirection: "row", marginBottom:5, marginTop:5}}>
             <Pressable hitSlop={10} style={styles.pres} onPress={()=>props.setFilterParam({...props.filterParam, gategory: ""})}> 
                 <Text style={{marginLeft: 7, marginRight: 1}} >{props.filterParam.gategory}</Text>
                 {props.filterParam.gategory!=="" && <Ionicons name="remove-circle-outline" size={12} color="red" />}
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
     },
     item: {
       margin: 1,
-      marginBottom: 4
+      marginBottom: 1
     },
     pres: {
         alignContent: "center",
@@ -116,15 +116,12 @@ const styles = StyleSheet.create({
       fontSize: 32,
     },
     title1: {
-      fontSize:22,
-      marginTop: 5,
-      marginBottom:5,
-      marginHorizontal: 10,
-        borderWidth: 1,
+        fontSize:26,
+        marginHorizontal: 10,
+        borderWidth: 2,
         borderColor:"grey",
-        borderRadius: 10,
-    //   borderRadius: 1,
-    //   borderWidth: 1
+        borderRadius: 7,
+        
     },
     
   

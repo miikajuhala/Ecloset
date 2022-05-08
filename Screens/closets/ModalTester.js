@@ -81,7 +81,7 @@ export default function ModalTester(props) {
 
   return (
     <View style={{ flex: 1 }}>
-    <TouchableOpacity  onPress={toggleModal}>
+    <TouchableOpacity style={styles.text} onPress={toggleModal}>
         <Text>{props.item[1].name}</Text>
     </TouchableOpacity>
     
@@ -144,10 +144,14 @@ const styles = StyleSheet.create({
     width: '88%'
   },
   text: {
-    marginTop: 12,
-    marginLeft:12,
-    fontSize: 16
-  
+    height: 40,
+    marginTop:0,
+    borderWidth: 1,
+    padding: 10,
+    borderColor: "#e2e2e2",
+    borderRadius: 5,
+    borderTopEndRadius:0,
+    borderTopStartRadius:0
   },
   verticleLine: {
     height: 1,

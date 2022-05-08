@@ -47,20 +47,15 @@ export default function Browsecombinations({navigation}) {
 
          const shirts1 = clothesArray.filter(type => type[1].gategory === "Shirts" || type[1].gategory === "T-shirts" || type[1].gategory ===  "Sweatshirts & Hoodies" ||  type[1].gategory === 'Jackets')
          setShirts(shirts1)
-        //  console.log("SHIRTS", shirts1)
+        
 
          const pants1 = clothesArray.filter(type => type[1].gategory === 'Jeans' ||  type[1].gategory === 'Trousers' ||  type[1].gategory === 'Shorts' || type[1].gategory === 'Joggers')
          setPants(pants1)
-        //  console.log("PANTS",pants1)
+        
 
          const shoes1 = clothesArray.filter(type => type[1].gategory ==='Shoes')
          setShoes(shoes1)
-        //  console.log("SHOES", shoes1)
-        
-       
-        // arr.push(data)
-
-        // setClothes(arr[0])
+      
           console.log("IN UE",Object.entries(data)) 
         
     });
@@ -89,7 +84,7 @@ const renderItem = ({ item }) => {
    <View style={{flex:1, marginTop: 55, backgroundColor: "#d3d3d3"}}>
       {!loaded && <Loading></Loading>}
     <Carousel
-    style={{ height: 800}}
+    style={{ height: 500, marginTop:14}}
     data={shirts}
     renderItem={renderItem}
     itemWidth={windowWidth * 0.8}
@@ -98,7 +93,7 @@ const renderItem = ({ item }) => {
   />
 
     <Carousel
-      style={{ height:800}}
+      style={{ height:400}}
       data={pants}
       renderItem={renderItem}
       itemWidth={windowWidth * 0.8}
@@ -155,14 +150,14 @@ const styles = StyleSheet.create({
   },
   title1: {
     fontSize:22,
-    marginTop: 5,
+    // marginTop: 5,
     marginHorizontal: 10,
     borderRadius: 1,
     borderWidth: 1
   },
   container1:{
     flex:1,
-    marginTop:20,
+    // marginTop:20,
     backgroundColor:"#eee"
   },
   list: {
@@ -173,7 +168,7 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   separator: {
-    marginTop: 10,
+    // marginTop: 10,
   },
   /******** card **************/
  
