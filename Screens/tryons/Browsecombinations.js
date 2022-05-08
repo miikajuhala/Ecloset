@@ -86,10 +86,10 @@ const renderItem = ({ item }) => {
 
 
   return (
-   <View style={{flex:1, marginTop: 55}}>
+   <View style={{flex:1, marginTop: 55, backgroundColor: "#d3d3d3"}}>
       {!loaded && <Loading></Loading>}
     <Carousel
-    style={{ height: 700}}
+    style={{ height: 800}}
     data={shirts}
     renderItem={renderItem}
     itemWidth={windowWidth * 0.8}
@@ -98,7 +98,7 @@ const renderItem = ({ item }) => {
   />
 
     <Carousel
-      style={{ height:700}}
+      style={{ height:800}}
       data={pants}
       renderItem={renderItem}
       itemWidth={windowWidth * 0.8}
@@ -138,6 +138,8 @@ const styles = StyleSheet.create({
    cardImage:{
      flex: 1,
     height: 200,
+    borderWidth:1,
+    borderRadius:8
   },
   item: {
     padding: 20,

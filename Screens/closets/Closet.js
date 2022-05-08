@@ -209,6 +209,8 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 200,
     width: null,
+    borderWidth:1,
+    borderRadius:5
   },
   /******** card components **************/
   share:{
