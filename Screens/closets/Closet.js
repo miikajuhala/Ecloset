@@ -27,14 +27,13 @@ import ModalTester from "./ModalTester";
 export default function Closet({navigation}) {
 
 
-  const [selectedId, setSelectedId] = useState(null);
+
   const [clothes, setClothes] = useState([])
   const [sortedClothes, setSortedClothes] = useState(null)
   const [filterParam, setFilterParam] = useState({gategory: "", color: ""})
-  const [loaded, setLoaded] = useState(false)
 
   const auth = getAuth(app);
-  const storage = getStorage();
+
 
   const [info, setInfo] = useState(false)
 //TODO: UTF8 tuki syöttökenttiin addclothersissa ja modaalissa
@@ -48,21 +47,25 @@ export default function Closet({navigation}) {
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
 
-        // console.log(Object.entries(data)[0][1].color)
+         
 
-        console.log(data)
-        if(data===undefined ||data===null || Object.entries(data)[0][1]===null || Object.entries(data)[0][1]===undefined) {
+        console.log("DSADASD",Object.entries(data)[0][1])
+        if(data===undefined ||data===null || Object.entries(data)[0][1] ===auth.currentUser.uid || Object.entries(data)[0][1]===null || Object.entries(data)[0][1]===undefined) {
          setClothes(exampledata) 
          setInfo(true)
+         setSortedClothes(exampledata)
+        
         }
         else{
           setClothes(Object.entries(data))
+          setSortedClothes(Object.entries(data))
           setInfo(false)
+          console.log("TERVE", Object.entries(data))
         }
 
-          setSortedClothes(Object.entries(data))
+          
         
-          console.log("IN UE",data) 
+         
         
     });
 },[!sortedClothes, !filterParam])
@@ -94,6 +97,8 @@ useEffect(()=>{
     setSortedClothes(result)
   }
 
+
+
 },[filterParam])
 
 
@@ -105,7 +110,7 @@ useEffect(()=>{
 
   //flatlist antaa yhden elementin kerallaan ja renderöi sen tässä
   const renderItem = ({ item }) => {
-    if(item[1].pictureUrl !== null){
+    if(item[1].pictureUrl !== undefined){
     return (
       <View style={styles.card}>
       <ImageBackground style={styles.cardImage} source={favicon}>

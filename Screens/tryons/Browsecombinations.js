@@ -40,12 +40,15 @@ export default function Browsecombinations({navigation}) {
         const data = snapshot.val();
         let clothesArray;
 
-        console.log("DATAA",Object.entries(data)[0][1])
+     
+        // console.log(Object.keys(data)[1])
 
-        if(data===undefined ||data===null || Object.entries(data)[0][1]===null || Object.entries(data)[0][1]===undefined){
+        if(data===undefined ||data===null || Object.entries(data)[0][1] ===auth.currentUser.uid ||Object.entries(data)[0][1]===null ||Object.entries(data)[0][1]===undefined){
           clothesArray = exampledata;
           setInfo(true)
+          console.log("hey")
         }else{
+          console.log("fuck")
           clothesArray = Object.entries(data)
           setInfo(false)
         }
@@ -63,7 +66,7 @@ export default function Browsecombinations({navigation}) {
         const shoes1 = clothesArray.filter(type => type[1].gategory ==='Shoes')
         setShoes(shoes1)
     
-        console.log("IN UE",Object.entries(data)) 
+        
         
     });
 },[])
