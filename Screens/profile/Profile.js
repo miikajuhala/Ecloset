@@ -5,7 +5,7 @@ import { app } from "../../firebase"
 import LoginGoogle from '../../buttons/GoogleLogin';
 
 
-export default function Profile() {
+export default function Profile({navigation}) {
 
   const auth = getAuth(app);
   
@@ -21,11 +21,14 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
+    <Text style={styles.description}>Profile</Text>
       <View style={styles.body}>
         <View style={styles.bodyContent}>
 
-      <Text style={styles.description}>Change user</Text>
-       <LoginGoogle></LoginGoogle>
+      
+      <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer1}>
+            <Text>Change user</Text>  
+      </TouchableOpacity> 
 
         <View style={styles.verticleLine}></View>
                    
@@ -91,7 +94,7 @@ color: "#9b59b6",
 marginTop:10
 },
 description:{
-fontSize:16,
+fontSize:18,
 color: "#696969",
 marginTop:10,
 textAlign: 'center'
@@ -109,7 +112,7 @@ borderRadius:30,
 backgroundColor: "#9b59b6",
 },
 buttonContainer1:{
-  marginTop:10,
+  marginTop:40,
   height:45,
   flexDirection: 'row',
   justifyContent: 'center',

@@ -96,9 +96,9 @@ export default function LoginGoogle({navigation}) {
 
 
         <Pressable style={{
-            width: '80%',
-            height: 60,
-            margin: 10
+            width: '90%',
+            height: 80,
+
         }}
           onPress={()=>{signInWithGoogleAsync()}}
 
@@ -108,7 +108,8 @@ export default function LoginGoogle({navigation}) {
                 style={{
                     flex:1,
                     justifyContent: 'center',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                   
                 }}
                 resizeMode="cover"
             >
