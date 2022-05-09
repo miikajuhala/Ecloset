@@ -6,9 +6,9 @@ import AddclothesButton from "./AddclothesButton";
 import {db, app} from '../../firebase'
 import { getAuth } from 'firebase/auth';
 import { Image } from 'react-native';
+import exampledata from "../tryons/exampledata";
 import { getDownloadURL, getStorage, ref as STORAGERef  } from 'firebase/storage'
 
-import {DATA as EXAMPLEDATA} from "./exampledata";
 import {Picker, PickerIOS} from '@react-native-picker/picker';
 
 import colorData from './colors';
@@ -19,7 +19,13 @@ import favicon from "../../assets/load.gif"
 import Modal from "react-native-modal";
 import ModalTester from "./ModalTester";
 
+
+
+
+
+
 export default function Closet({navigation}) {
+
 
   const [selectedId, setSelectedId] = useState(null);
   const [clothes, setClothes] = useState([])
@@ -30,8 +36,10 @@ export default function Closet({navigation}) {
   const auth = getAuth(app);
   const storage = getStorage();
 
-
-
+  const [info, setInfo] = useState(false)
+//TODO: UTF8 tuki syöttökenttiin addclothersissa ja modaalissa
+//TODO: login nätimmäks
+//TODO: browseclothes valmiiks
 
  
   useEffect(() => {
@@ -41,17 +49,20 @@ export default function Closet({navigation}) {
         const data = snapshot.val();
 
         // console.log(Object.entries(data)[0][1].color)
-        if (data != null || data != undefined){
-         setClothes(Object.entries(data))
+
+        console.log(data)
+        if(data===undefined ||data===null || Object.entries(data)[0][1]===null || Object.entries(data)[0][1]===undefined) {
+         setClothes(exampledata) 
+         setInfo(true)
         }
         else{
-          setClothes(EXAMPLEDATA) 
-
+          setClothes(Object.entries(data))
+          setInfo(false)
         }
 
           setSortedClothes(Object.entries(data))
         
-          console.log("IN UE",Object.entries(data)) 
+          console.log("IN UE",data) 
         
     });
 },[!sortedClothes, !filterParam])
@@ -121,7 +132,7 @@ useEffect(()=>{
       <SelectGategory  styles={styles} setFilterParam={setFilterParam} filterParam={filterParam} gategories={gategories} colorData={colorData} ></SelectGategory>
     </View>
 
-
+    {info && <Text>Example images, add your own to display them</Text>}
       <FlatList
         data={sortedClothes}
         renderItem={renderItem}
@@ -213,8 +224,8 @@ const styles = StyleSheet.create({
     borderRadius:5
     ,borderColor: "black",
     borderBottomWidth: 0,
-    borderBottomEndRadius:0,
-    borderBottomStartRadius:0
+    borderBottomRightRadius:0,
+    borderBottomLeftRadius:0
   },
   /******** card components **************/
   share:{

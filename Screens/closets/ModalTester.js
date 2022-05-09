@@ -60,7 +60,7 @@ export default function ModalTester(props) {
         },
         { text: "OK", onPress: () =>  
         set(
-          dbRef(db, 'users/' + auth.currentUser.uid+"/"+props.item[1].date), {
+          dbRef(db, 'users/' + auth.currentUser.uid+"/"+props.item[0]), {
             userId: null,
             name: null,
             pictureUrl: null, 

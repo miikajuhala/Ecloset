@@ -92,13 +92,10 @@ export default function LoginGoogle({navigation}) {
 
     return (
 
-    
-
-
         <Pressable style={{
+           
             width: '90%',
             height: 80,
-
         }}
           onPress={()=>{signInWithGoogleAsync()}}
 
