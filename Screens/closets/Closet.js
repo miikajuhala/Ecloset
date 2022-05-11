@@ -36,9 +36,7 @@ export default function Closet({navigation}) {
 
 
   const [info, setInfo] = useState(false)
-//TODO: UTF8 tuki syöttökenttiin addclothersissa ja modaalissa
-//TODO: login nätimmäks
-//TODO: browseclothes valmiiks
+
 
  
   useEffect(() => {
@@ -47,9 +45,7 @@ export default function Closet({navigation}) {
         onValue(starCountRef, (snapshot) => {
         const data = snapshot.val();
 
-         
-
-        console.log("DSADASD",Object.entries(data)[0][1])
+        
         if(data===undefined ||data===null || Object.entries(data)[0][1] ===auth.currentUser.uid || Object.entries(data)[0][1]===null || Object.entries(data)[0][1]===undefined) {
          setClothes(exampledata) 
          setInfo(true)
@@ -60,7 +56,7 @@ export default function Closet({navigation}) {
           setClothes(Object.entries(data))
           setSortedClothes(Object.entries(data))
           setInfo(false)
-          console.log("TERVE", Object.entries(data))
+         
         }
 
           

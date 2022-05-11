@@ -13,9 +13,6 @@ export default function AddClothesgg({navigation}) {
  
   return (
     <View style={styles.container}> 
-        {/* <Text style={styles.title}>add new clothes</Text> */}
-
-
         <TouchableOpacity style={styles.btn} onPress={()=>navigation.navigate("Camera")}>
         <Ionicons name="ios-camera-outline" size={55} color="black" />
         <Text>Take picture</Text>
@@ -32,7 +29,6 @@ export default function AddClothesgg({navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // flexDirection: "column",
     marginTop: 20,
     alignItems: "center",
     alignSelf: "center"

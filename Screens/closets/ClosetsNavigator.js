@@ -17,8 +17,7 @@ export default function ClosetsNavigator() {
             <Stack.Screen name="AddClothes" component={AddClothesgg} options={{ title:""}}/>
             <Stack.Screen name="Camera" component={CameraComponent}  options={{ title:""}} />
             <Stack.Screen name="UsePicture" component={usePicture}   options={{ title:""}} />
-            <Stack.Screen name="ImagePickerScreen" component={ImagePickerScreen} options={{ title:""}}/>
-            
+            <Stack.Screen name="ImagePickerScreen" component={ImagePickerScreen} options={{ title:""}}/>   
         </Stack.Navigator>
     )
 }
