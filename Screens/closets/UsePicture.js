@@ -67,18 +67,14 @@ const toggleExpanded1 = () => {
         console.log("4")
         const ref1 = ref(storage,("images/"+auth.currentUser.uid+"/"+Date.now()));
         uploadBytes(ref1, blob).then((snapshot) => {
-            console.log("5")
-          //  console.log(snapshot);
-        // ota firebase url vastaan ja tallenna se url käyttäjälle + nimi +väri kuvalle
-        // snapshot.metadata.fullPath
-
-
-        const starsRef = ref(storage, snapshot.metadata.fullPath)
-        getDownloadURL(starsRef)
-          .then((url) => {
-            console.log("6")
-            savePictureToUser(url);
-        })
+        console.log("5")
+  
+          const starsRef = ref(storage, snapshot.metadata.fullPath)
+          getDownloadURL(starsRef)
+            .then((url) => {
+              console.log("6")
+              savePictureToUser(url);
+          })
 
         });
         
@@ -215,10 +211,7 @@ const toggleExpanded1 = () => {
                   setGategory(e.value)
                   setTimeout(() => {
                     toggleExpanded1()
-                  }, 1000);
-                 
-
-                  
+                  }, 1000); 
                 }}
                 icon={
                     <Icon
@@ -227,7 +220,7 @@ const toggleExpanded1 = () => {
                       color={color}
                     />
                   }
-              />
+            />
         </Collapsible>
               
 

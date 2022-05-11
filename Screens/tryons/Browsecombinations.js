@@ -40,15 +40,12 @@ export default function Browsecombinations({navigation}) {
         const data = snapshot.val();
         let clothesArray;
 
-     
-        // console.log(Object.keys(data)[1])
 
         if(data===undefined ||data===null || Object.entries(data)[0][1] ===auth.currentUser.uid ||Object.entries(data)[0][1]===null ||Object.entries(data)[0][1]===undefined){
           clothesArray = exampledata;
           setInfo(true)
-          console.log("hey")
+        
         }else{
-          console.log("fuck")
           clothesArray = Object.entries(data)
           setInfo(false)
         }
@@ -73,11 +70,6 @@ export default function Browsecombinations({navigation}) {
 
 
 
-
-
-
-
-
 const renderItem = ({ item }) => {
   return (
     <View style={styles.card}>
@@ -99,19 +91,19 @@ const renderItem2 = ({ item }) => {
   return (
    <View style={{flex:1, marginTop: 55, backgroundColor: "#d3d3d3",margin:5, alignSelf:"center", marginBottom: 5}}>
 
-      {!loaded && <Loading></Loading>}
-      {info && <Text>Example images, add your own in closet page</Text>}
-    <Carousel
-    style={{ marginTop:2}}
-    data={shirts}
-    renderItem={renderItem}
-    itemWidth={windowWidth * 0.8}
-    separatorWidth={0}
-    containerWidth={windowWidth}
-  />
+    {!loaded && <Loading></Loading>}
+    {info && <Text>Example images, add your own in closet page</Text>}
 
     <Carousel
-     
+      style={{ marginTop:2}}
+      data={shirts}
+      renderItem={renderItem}
+      itemWidth={windowWidth * 0.8}
+      separatorWidth={0}
+      containerWidth={windowWidth}
+    />
+
+    <Carousel
       data={pants}
       renderItem={renderItem}
       itemWidth={windowWidth * 0.8}
@@ -165,12 +157,6 @@ const styles = StyleSheet.create({
     borderRadius: 1,
     borderWidth: 1
   },
- 
-  separator: {
-    // marginTop: 10,
-  },
-  /******** card **************/
-
 
 });
 
