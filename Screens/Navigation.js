@@ -34,16 +34,17 @@ export default function Navigation() {
 
 
   const screenOptions = ({ route }) => ({
+
+    
     tabBarIcon: ({ focused, color, size }) => {
   
       if (route.name === 'Combinations') {
         return <MaterialCommunityIcons name="human-handsup" size={size} color="black" />
       } else if (route.name === 'Closet') {
         return <FontAwesome5 name="door-open" size={size} color="black" />
-      }else if (route.name === 'Profile') {
+      }else if (route.name === 'Settings') {
         return <AntDesign name="user" size={size} color="black" />
       }
-  
     }
   });
 
@@ -51,10 +52,10 @@ export default function Navigation() {
     if (logged) {
         return (
           <NavigationContainer>      
-              <Tab.Navigator screenOptions={screenOptions}>
+              <Tab.Navigator initialRouteName="Closet" lazy={false} screenOptions={screenOptions} >
                   <Tab.Screen name="Combinations" component={Browsecombinations}  options={{ headerShown: false}}/>
-                  <Tab.Screen name="Closet" component={ClosetsNavigator} options={{ headerShown: false}}  />
-                  <Tab.Screen name="Profile" component={Profile} options={{ headerShown: false}}/>
+                  <Tab.Screen name="Closet" component={ClosetsNavigator} options={{ headerShown: false,}}  />
+                  <Tab.Screen name="Settings" component={Profile} options={{ headerShown: false}}/>
               </Tab.Navigator>
           </NavigationContainer>
         )
@@ -63,7 +64,7 @@ export default function Navigation() {
         return (
           <NavigationContainer>      
                 <Tab.Navigator screenOptions={screenOptions}>
-                    <Tab.Screen name="Login" component={Login} options={{ headerShown: false}}  />
+                    <Tab.Screen name="Login" component={Login} options={{ headerShown: false, tabBarStyle: { display: "none" } }}  />
                 </Tab.Navigator>
           </NavigationContainer>
         );

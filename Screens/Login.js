@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, ImageBackground } from "react-native";
 import LoginGoogle from "../buttons/GoogleLogin";
-import Image from "../assets/backroundi.jpg"
+import Image from "../assets/backroundi.png"
 
 export default function Login({navigation}) {
 
@@ -23,20 +23,21 @@ export default function Login({navigation}) {
     <ImageBackground 
         style={{
             flex:1,
-            justifyContent: 'center',
-            alignItems: 'center'
         }}
         resizeMode="cover"
         source={Image}
     >  
 
-        <View style={{ marginBottom: 170}}>
+        <View style={{alignSelf: "center", marginTop: "20%"}}>
             <Text style={styles.description}>Ecloset</Text>
 
         </View>
         
-        <LoginGoogle  navigation={navigation}/>
-
+        
+        <View style={{alignSelf: "center", marginTop: "80%"}}> 
+        <View style={styles.verticleLine}></View>
+            <LoginGoogle navigation={navigation}/>
+        </View>
     </ImageBackground>
     </View>
     )
@@ -47,10 +48,15 @@ export default function Login({navigation}) {
 const styles = StyleSheet.create({
    
     description:{
-    fontSize:55,
-    color: "#484848",
+    fontSize:70,
+    color: "lightgrey",
     width: "80%",
-
+    },
+    verticleLine: {
+        height: 1.5,
+        width: 300,
+        backgroundColor: '#909090',
+        margin: 15
     }
-    });
+});
     

@@ -1,5 +1,5 @@
 import { ImageBackground, Pressable, Alert } from "react-native";
- import GoogleImg from '../assets/google.png'
+ import GoogleImg from '../assets/googlewhite.png'
 import * as Google from 'expo-google-app-auth';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged, signInWithCredential, GoogleAuthProvider} from "firebase/auth";
@@ -94,7 +94,7 @@ export default function LoginGoogle({navigation}) {
 
         <Pressable style={{
            
-            width: '90%',
+            width: 330,
             height: 80,
         }}
           onPress={()=>{signInWithGoogleAsync()}}
@@ -103,12 +103,8 @@ export default function LoginGoogle({navigation}) {
             <ImageBackground
                 source={GoogleImg}
                 style={{
-                    flex:1,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                   
+                    flex:1
                 }}
-                resizeMode="cover"
             >
             </ImageBackground>
         </Pressable>

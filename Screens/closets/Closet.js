@@ -50,19 +50,12 @@ export default function Closet({navigation}) {
          setClothes(exampledata) 
          setInfo(true)
          setSortedClothes(exampledata)
-        
         }
         else{
           setClothes(Object.entries(data))
           setSortedClothes(Object.entries(data))
           setInfo(false)
-         
         }
-
-          
-        
-         
-        
     });
 },[!sortedClothes, !filterParam])
 
@@ -136,7 +129,7 @@ useEffect(()=>{
     {info && <Text>Example images, add your own to display them</Text>}
       <FlatList
         data={sortedClothes}
-        renderItem={renderItem}
+        renderItem={renderItem} 
         keyExtractor={(item) => item[1].pictureUrl}
         numColumns={2}
         contentContainerStyle={styles.listContainer}

@@ -21,24 +21,25 @@ export default function Profile({navigation}) {
 
   return (
     <View style={styles.container}>
-    <Text style={styles.description}>Profile</Text>
-      <View style={styles.body}>
-        <View style={styles.bodyContent}>
 
-      
+      <Text style={styles.description}>Settings</Text>
+        <View style={styles.body}>
+      <View style={styles.bodyContent}>
+
+
       <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer1}>
-            <Text>Change user</Text>  
+        <Text>Change user</Text>  
       </TouchableOpacity> 
 
-        <View style={styles.verticleLine}></View>
-                   
-          <TouchableOpacity style={styles.buttonContainer}>
-            <Text>Buy premium</Text> 
-          </TouchableOpacity>
-          <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer}>
-            <Text>Sign out</Text>  
-          </TouchableOpacity>   
-        </View>
+      <View style={styles.verticleLine}></View>
+                
+      <TouchableOpacity onPress={()=>googleSignout()} style={styles.buttonContainer}>
+        <Text>Sign out</Text>  
+      </TouchableOpacity>   
+
+     
+
+    </View>
     </View>
   </View>
   );

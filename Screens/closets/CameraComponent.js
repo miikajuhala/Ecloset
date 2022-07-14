@@ -6,6 +6,8 @@ import { Camera } from 'expo-camera';
 import { ref, uploadBytes } from "firebase/storage";
 import { app, db, storage } from "../../firebase"
 import { NavigationContainer } from '@react-navigation/native';
+import ActionButton from 'react-native-action-button';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default function CameraComponent({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -126,6 +128,36 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: 'white',
   },
+  actionButton: {
+    
+      borderWidth: 1,
+      borderColor: 'rgba(0,0,0,0.2)',
+      alignItems: 'center',
+      justifyContent: 'center',
+      width: 60,
+      position: 'absolute',
+      bottom: 20,
+      left: 100,
+      height: 60,
+      backgroundColor: '#fff',
+      borderRadius: 100,
+    
+  },
+  actionButton2: {
+    
+    borderWidth: 1,
+    borderColor: 'rgba(0,0,0,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 60,
+    position: 'absolute',
+    bottom: 20,
+    right: 100,
+    height: 60,
+    backgroundColor: '#fff',
+    borderRadius: 100,
+  
+},
 });
 
 
@@ -147,8 +179,22 @@ const CameraPreview = (props) => {
           flex: 1
         }}
       />
-      <Button title='retake' onPress={()=>props.retakePicture()}></Button>
-      <Button title='Use photo' onPress={()=>props.savePicture()}></Button>
-    </View>
+   
+    <TouchableOpacity
+      onPress={()=>props.savePicture()}
+      style={styles.actionButton}
+    > 
+      <Ionicons name="checkmark" size={35} color="green" />
+    </TouchableOpacity>
+
+    <TouchableOpacity
+      onPress={()=>props.retakePicture()}
+      style={styles.actionButton2}
+    >
+      <Ionicons name="arrow-undo-sharp" size={35} color="red" />
+    </TouchableOpacity>
+   
+</View>
+
   )
 }
