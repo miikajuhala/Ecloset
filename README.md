@@ -1,5 +1,6 @@
 # Ecloset. Virtual wardrobe!
-![IMG-1177](https://user-images.githubusercontent.com/77334107/199267890-69f20756-b861-4aa3-8720-cf693548c93d.PNG)
-![IMG-1178](https://user-images.githubusercontent.com/77334107/199267894-4ef00bad-e1a9-4f5b-a110-d4782df0f969.PNG)
-![IMG-1179](https://user-images.githubusercontent.com/77334107/199267898-0f784968-4a7a-489f-9be1-82c3bef6eca9.PNG)
-![IMG-1181](https://user-images.githubusercontent.com/77334107/199267903-eefc7412-61da-441b-b609-4518910683ef.PNG)
+
+![IMG-1181](https://user-images.githubusercontent.com/77334107/199268305-9213633b-575c-4f65-bce5-bde58d2c716e.PNG)
+![IMG-1179](https://user-images.githubusercontent.com/77334107/199268406-9c56109e-bc46-4b4e-9ad1-a6045858d68b.PNG)
+![IMG-1178](https://user-images.githubusercontent.com/77334107/199268416-1b3071db-b345-4054-9176-5d995d264eba.PNG)
+![IMG-1177](https://user-images.githubusercontent.com/77334107/199268421-b4ddbfb6-d0c9-4b70-bc0b-6221bfac0d14.PNG)
