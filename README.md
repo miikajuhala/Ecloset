@@ -1,4 +1,4 @@
-# Ecloset. Virtual wardrobe!
+# Ecloset. Virtual Closet!
 
 
 ![IMG-1177](https://user-images.githubusercontent.com/77334107/199268714-fe021635-7904-4fb0-b404-db04f8fb70be.PNG)
